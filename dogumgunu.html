@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>İyiki Doğdun Kocacığım.</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #d4af37;
+            --main-font: 'Montserrat', sans-serif;
+            --serif-font: 'Playfair Display', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            font-family: var(--main-font);
+            overflow-x: hidden;
+            transition: background-color 1s ease;
+        }
+
+        body.light-on-bg { background-color: #121212; }
+
+        section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- ABAJUR (İp Arka Planda) --- */
+        .abajur-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+            z-index: 10;
+        }
+
+        .abajur-head {
+            width: 160px;
+            height: 0;
+            border-bottom: 110px solid #222;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            position: relative;
+            z-index: 15; /* Başlık önde */
+            transition: all 0.5s ease;
+        }
+
+        .light-on .abajur-head {
+            border-bottom-color: #fffde7;
+            box-shadow: 0 0 80px rgba(255, 253, 231, 0.4);
+        }
+
+        .abajur-base {
+            width: 10px;
+            height: 130px;
+            background: #1a1a1a;
+            position: relative;
+            z-index: 14; /* Ayak ipin önünde, başlığın arkasında */
+        }
+
+        .abajur-bottom { width: 60px; height: 15px; background: #1a1a1a; border-radius: 50% 50% 0 0; position: relative; z-index: 14; }
+
+        /* İp Arka Planda */
+        .rope {
+            width: 3px;
+            height: 110px;
+            background: #555;
+            position: absolute;
+            right: 40px;
+            top: 70px; /* Başlığın içinden başla */
+            cursor: pointer;
+            z-index: 13; /* En arkada */
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .rope::after { content: ''; position: absolute; bottom: -12px; left: -5px; width: 13px; height: 13px; background: #777; border-radius: 50%; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        .rope:active { transform: translateY(25px); }
+
+        .intro-text { font-family: var(--serif-font); font-size: 1.2rem; color: #555; letter-spacing: 1px; margin-top: 30px; transition: color 0.5s; }
+        .scroll-indicator { opacity: 0; transition: opacity 1s; color: var(--accent-color); margin-top: 20px; font-weight: 600;}
+
+        /* --- PASTA VE BUTON (Güncellendi) --- */
+        .cake-img { width: 180px; margin-bottom: 20px; } /* SVG yerine resim */
+        .final-h2 { font-family: var(--serif-font); font-size: 2.8rem; color: var(--accent-color); margin-bottom: 15px; }
+        .gift-btn { background: none; border: 2px solid var(--accent-color); color: var(--accent-color); padding: 12px 30px; font-family: var(--main-font); font-weight: 600; text-transform: uppercase; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        .gift-btn:hover { background: var(--accent-color); color: #000; }
+
+        /* --- MEKTUP BÖLÜMÜ (Gizli) --- */
+        #letter-section { display: none; padding-top: 50px; }
+        .letter-container {
+            background-color: #1a1a1a;
+            width: 85%;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 4px;
+            border: 1px solid #333;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+        }
+
+        .letter-photo { width: 100%; object-fit: cover; }
+        .letter-content { padding: 30px; text-align: left; }
+        .letter-content h3 { font-family: var(--serif-font); font-size: 1.8rem; color: var(--accent-color); margin-bottom: 15px; text-align: center;}
+        .letter-content p { font-size: 1.1rem; color: #ccc; line-height: 1.6; margin-bottom: 10px; }
+
+        /* --- MOBİL UYUMLULUK SİHİRLERİ (MEDIA QUERIES) --- */
+        @media (max-width: 768px) {
+            .abajur-head { width: 130px; border-bottom: 90px solid #222; }
+            .abajur-base { height: 110px; }
+            .rope { height: 90px; right: 30px; }
+            .intro-text { font-size: 1rem; }
+            .cake-img { width: 140px; } /* Mobil pasta boyutu */
+            .final-h2 { font-size: 2rem; }
+            .gift-btn { padding: 10px 20px; font-size: 0.9rem; }
+            .letter-content h3 { font-size: 1.5rem; }
+            .letter-content p { font-size: 1rem; }
+        }
+
+    </style>
+</head>
+<body id="main-body">
+
+    <section>
+        <div class="abajur-container" id="lamp-container">
+            <div class="abajur-head"></div>
+            <div class="abajur-base"></div>
+            <div class="abajur-bottom"></div>
+            <div class="rope" onclick="lightTheLamp()"></div>
+        </div>
+        <p class="intro-text" id="status-text">Karanlığı aydınlatmak için ipi çek...</p>
+        <p class="scroll-indicator" id="scroll-note">↓ Aşağıya doğru devam et...</p>
+    </section>
+
+    <section data-aos="fade-up">
+        <img src="pasta.png.png" class="cake-img" alt="Profesyonel Pasta">
+        <h2 class="final-h2">İyiki Doğdun Kocacığım.</h2>
+        <button class="gift-btn" onclick="showLetter()">Hediyeni Gör</button>
+    </section>
+
+    <section id="letter-section" data-aos="fade-up">
+        <div class="letter-container">
+            <img src="foto2.jpg.jpeg" class="letter-photo"> <div class="letter-content">
+                <h3>Kocama</h3>
+                <p>"Amannn kocam yesin seni karın. İyiki doğdun iyiki benimsin iyiki kızımın babasısın amann minnoşum. Bizimle geçireceğin güzel, sağlıklı, mutlu, huzurlu yılların olsun seni çok seviyorum, seviyoruz. Seni iyi tanımışım sen benim
+                iyikimsin. Sevgili Karıcığın ve Kızın Doğa."</p>
+                <p style="text-align: right; color: var(--accent-color); font-weight: bold;"> </p>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        AOS.init({ duration: 1200, once: true });
+
+        function lightTheLamp() {
+            document.getElementById('lamp-container').classList.add('light-on');
+            document.getElementById('main-body').classList.add('light-on-bg');
+            document.getElementById('status-text').style.color = "#888";
+            document.getElementById('status-text').innerText = "Bugün senin günün.";
+            document.getElementById('scroll-note').style.opacity = "1";
+        }
+
+        function showLetter() {
+            // 1. Mektup bölümünü görünür yap
+            document.getElementById('letter-section').style.display = "flex";
+            
+            // 2. Mektup bölümüne kaydır
+            document.getElementById('letter-section').scrollIntoView({ behavior: "smooth" });
+            
+            // 3. Konfeti Patlat
+            confetti({
+                particleCount: 200,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#d4af37', '#ffffff']
+            });
+        }
+    </script>
+</body>
+</html>
